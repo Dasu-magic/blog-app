@@ -92,6 +92,10 @@ session_start();
     </a>
 
 <?php endif; ?>
+<a href="php/delete_blog.php?id=<?php echo $blog["id"]; ?>"
+   onclick="return confirm('Are you sure you want to delete this blog?');">
+    Delete Blog
+</a>
 
 </main>
 
