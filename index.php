@@ -4,12 +4,42 @@ session_start();
 
 require "php/db.php";
 
-$sql = "SELECT blogPost.*, user.username
-        FROM blogPost
-        JOIN user ON blogPost.user_id = user.id
-        ORDER BY blogPost.created_at DESC";
+$search = isset($_GET["search"])
+    ? trim($_GET["search"])
+    : "";
 
-$result = $conn->query($sql);
+if ($search !== "") {
+
+    $stmt = $conn->prepare(
+        "SELECT blogPost.*, user.username
+         FROM blogPost
+         JOIN user ON blogPost.user_id = user.id
+         WHERE blogPost.title LIKE ?
+         OR blogPost.content LIKE ?
+         ORDER BY blogPost.created_at DESC"
+    );
+
+    $keyword = "%" . $search . "%";
+
+    $stmt->bind_param(
+        "ss",
+        $keyword,
+        $keyword
+    );
+
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+} else {
+
+    $sql = "SELECT blogPost.*, user.username
+            FROM blogPost
+            JOIN user ON blogPost.user_id = user.id
+            ORDER BY blogPost.created_at DESC";
+
+    $result = $conn->query($sql);
+}
 
 ?>
 
@@ -60,7 +90,20 @@ $result = $conn->query($sql);
 
 <main>
 
-    <h2>Latest Blogs</h2>
+     <h2>Latest Blogs</h2>
+
+<form method="GET" action="index.php" class="search-form">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search blogs..."
+        value="<?php echo isset($_GET["search"]) ? htmlspecialchars($_GET["search"]) : ""; ?>"
+    >
+
+    <button type="submit">Search</button>
+
+</form>
 
     <?php if ($result && $result->num_rows > 0): ?>
 
