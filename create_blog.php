@@ -16,6 +16,7 @@ if (!isset($_SESSION["user_id"])) {
     <title>Create Blog</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
 </head>
 
 <body>
