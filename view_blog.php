@@ -79,6 +79,19 @@ $blog = $result->fetch_assoc();
         </div>
 
     </article>
+    <?php
+session_start();
+?>
+<?php if (
+    isset($_SESSION["user_id"]) &&
+    $_SESSION["user_id"] == $blog["user_id"]
+): ?>
+
+    <a href="edit_blog.php?id=<?php echo $blog["id"]; ?>">
+        Edit Blog
+    </a>
+
+<?php endif; ?>
 
 </main>
 
