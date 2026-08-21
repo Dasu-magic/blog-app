@@ -21,13 +21,11 @@ $stmt = $conn->prepare(
      WHERE id = ? AND user_id = ?"
 );
 
-$stmt->bind_param(
-    "ii",
-    $blog_id,
-    $user_id
-);
-
+$stmt->bind_param("ii", $blog_id, $user_id);
 $stmt->execute();
+
+$stmt->close();
+$conn->close();
 
 header("Location: ../index.php");
 exit();

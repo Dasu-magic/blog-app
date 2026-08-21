@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require "php/db.php";
 
 if (!isset($_GET["id"])) {
@@ -78,24 +80,23 @@ $blog = $result->fetch_assoc();
 
         </div>
 
+        <?php if (
+            isset($_SESSION["user_id"]) &&
+            $_SESSION["user_id"] == $blog["user_id"]
+        ): ?>
+
+            <a href="edit_blog.php?id=<?php echo $blog["id"]; ?>">
+                Edit Blog
+            </a>
+
+            <a href="php/delete_blog.php?id=<?php echo $blog["id"]; ?>"
+               onclick="return confirm('Are you sure you want to delete this blog?');">
+                Delete Blog
+            </a>
+
+        <?php endif; ?>
+
     </article>
-    <?php
-session_start();
-?>
-<?php if (
-    isset($_SESSION["user_id"]) &&
-    $_SESSION["user_id"] == $blog["user_id"]
-): ?>
-
-    <a href="edit_blog.php?id=<?php echo $blog["id"]; ?>">
-        Edit Blog
-    </a>
-
-<?php endif; ?>
-<a href="php/delete_blog.php?id=<?php echo $blog["id"]; ?>"
-   onclick="return confirm('Are you sure you want to delete this blog?');">
-    Delete Blog
-</a>
 
 </main>
 

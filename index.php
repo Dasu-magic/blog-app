@@ -94,6 +94,9 @@ $result = $conn->query($sql);
                     ...
 
                 </p>
+                <a href="view_blog.php?id=<?php echo $blog["id"]; ?>">
+    Read More
+</a>
 
             </article>
 
