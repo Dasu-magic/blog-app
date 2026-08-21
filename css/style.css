@@ -142,4 +142,25 @@ form button {
     border-radius: 5px;
     cursor: pointer;
 }
+.single-blog {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.single-blog h2 {
+    margin-top: 0;
+}
+
+.blog-content {
+    margin-top: 25px;
+    line-height: 1.6;
+}
+
+.blog-card a {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
 }
