@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header */
+
+header {
+    background-color: #222;
+    color: white;
+    padding: 15px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+nav span {
+    margin-left: 15px;
+}
+
+/* Login / Register */
+
+.auth-container {
+    width: 350px;
+    margin: 100px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h2 {
+    text-align: center;
+}
+
+.auth-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.auth-container button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: #222;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.auth-container button:hover {
+    background-color: #444;
+}
+
+/* Blog */
+
+main {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.blog-card {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.blog-card h3 {
+    margin-top: 0;
+}
+
+.author {
+    color: #777;
+    font-size: 14px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    header {
+        flex-direction: column;
+    }
+
+    nav {
+        margin-top: 10px;
+    }
+
+    .auth-container {
+        width: 90%;
+    }
+
+    main {
+        width: 90%;
+    }
+}
