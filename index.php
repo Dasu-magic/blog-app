@@ -41,6 +41,7 @@ $result = $conn->query($sql);
                 Welcome,
                 <?php echo htmlspecialchars($_SESSION["username"]); ?>
             </span>
+            <a href="create_blog.php">Create Blog</a>
 
             <a href="php/logout.php">Logout</a>
 
