@@ -19,6 +19,7 @@ $createTables = [
         email VARCHAR(150) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
         profile_image VARCHAR(255) NOT NULL DEFAULT '',
+        role VARCHAR(20) NOT NULL DEFAULT 'user',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )",
     "CREATE TABLE IF NOT EXISTS blogPost (
@@ -59,6 +60,11 @@ foreach ($createTables as $query) {
 $checkProfileCol = $conn->query("SHOW COLUMNS FROM user LIKE 'profile_image'");
 if ($checkProfileCol && $checkProfileCol->num_rows === 0) {
     $conn->query("ALTER TABLE user ADD COLUMN profile_image VARCHAR(255) NOT NULL DEFAULT ''");
+}
+
+$checkRoleCol = $conn->query("SHOW COLUMNS FROM user LIKE 'role'");
+if ($checkRoleCol && $checkRoleCol->num_rows === 0) {
+    $conn->query("ALTER TABLE user ADD COLUMN role VARCHAR(20) NOT NULL DEFAULT 'user'");
 }
 
 $checkViewsCol = $conn->query("SHOW COLUMNS FROM blogPost LIKE 'views'");

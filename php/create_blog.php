@@ -25,8 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $fileExt = strtolower(pathinfo($_FILES["blog_image"]["name"], PATHINFO_EXTENSION));
         $allowed = ["png", "jpg", "jpeg", "gif", "webp"];
 
-        if (in_array($fileExt, $allowed, true)) {
-            $fileName = "blog_" . $user_id . "_" . uniqid() . "." . $fileExt;
+             if (in_array($fileExt, $allowed, true) && getimagesize($_FILES["blog_image"]["tmp_name"]) !== false) {
+    $fileName = "blog_" . $user_id . "_" . uniqid() . "." . $fileExt;
             $targetPath = $uploadDir . $fileName;
 
             if (move_uploaded_file($_FILES["blog_image"]["tmp_name"], $targetPath)) {

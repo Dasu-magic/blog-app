@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "php/db.php";
+require_once __DIR__ . "/php/bootstrap.php";
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.html");
@@ -42,8 +42,8 @@ if ($blogsResult && $blogsResult->num_rows > 0) {
     $blogsResult->data_seek(0);
 }
 
-$defaultAvatar = "default-avatar.svg";
-$avatarPath = !empty($user["profile_image"]) ? htmlspecialchars($user["profile_image"]) : $defaultAvatar;
+$defaultAvatar = APP_URL . "/default-avatar.svg";
+$avatarPath = !empty($user["profile_image"]) ? APP_URL . "/" . ltrim($user["profile_image"], "/") : $defaultAvatar;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +52,7 @@ $avatarPath = !empty($user["profile_image"]) ? htmlspecialchars($user["profile_i
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($user["username"]); ?> | LetsBlog</title>
     <meta name="theme-color" content="#FFCC00">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<?= APP_URL ?>/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -73,7 +73,7 @@ $avatarPath = !empty($user["profile_image"]) ? htmlspecialchars($user["profile_i
         <aside class="sidebar">
             <div class="widget profile-card compact-profile-card">
                 <div class="profile-identity-row">
-                    <img class="profile-avatar" src="<?php echo $avatarPath; ?>" alt="Profile picture">
+                    <img class="profile-avatar" src="<?php echo htmlspecialchars($avatarPath); ?>" alt="Profile picture" onerror="this.onerror=null;this.src='<?= APP_URL ?>/default-avatar.svg';">
                     <div class="profile-identity-copy">
                         <span class="profile-label">Profile</span>
                         <h2><?php echo htmlspecialchars($user["username"]); ?></h2>

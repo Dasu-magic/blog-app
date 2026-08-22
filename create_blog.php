@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once __DIR__ . "/php/app.php";
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.html");
@@ -16,10 +17,10 @@ if (!isset($_SESSION["user_id"])) {
     <meta name="theme-color" content="#FFCC00">
     <title>Create Blog - LetsBlog</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<?= APP_URL ?>/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <script src="js/script.js" defer></script>
+    <script src="<?= APP_URL ?>/js/script.js" defer></script>
 </head>
 
 <body>

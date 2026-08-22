@@ -1,12 +1,21 @@
 <?php
-
 session_start();
 
-require "php/db.php";
-
+require_once __DIR__ . "/php/bootstrap.php";
 $search = isset($_GET["search"])
     ? trim($_GET["search"])
     : "";
+
+if (isset($_SESSION["user_id"])) {
+    $profileStmt = $conn->prepare("SELECT profile_image FROM user WHERE id = ?");
+    $profileStmt->bind_param("i", $_SESSION["user_id"]);
+    $profileStmt->execute();
+    $profileResult = $profileStmt->get_result();
+    $profileRow = $profileResult->fetch_assoc();
+    if ($profileRow && isset($profileRow["profile_image"])) {
+        $_SESSION["profile_image"] = $profileRow["profile_image"];
+    }
+}
 
 if ($search !== "") {
 
@@ -53,7 +62,7 @@ if ($search !== "") {
 
     <title>LetsBlog</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<?= APP_URL ?>/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
@@ -81,7 +90,12 @@ if ($search !== "") {
       <span class="profile-inline">
           <span class="welcome-message"><?php echo htmlspecialchars($_SESSION["username"] ?? "Reader"); ?></span>
           <a href="profile.php" class="profile-nav-link" aria-label="Go to profile" title="Profile">
-              <img src="<?php echo !empty($_SESSION["profile_image"]) ? htmlspecialchars($_SESSION["profile_image"]) : "default-avatar.svg"; ?>" alt="Profile picture">
+              <?php
+                  $navAvatar = !empty($_SESSION["profile_image"])
+                      ? APP_URL . "/" . ltrim($_SESSION["profile_image"], "/")
+                      : APP_URL . "/default-avatar.svg";
+              ?>
+              <img src="<?php echo htmlspecialchars($navAvatar); ?>" alt="Profile picture" onerror="this.onerror=null;this.src='<?= APP_URL ?>/default-avatar.svg';">
           </a>
       </span>
   <?php else: ?>

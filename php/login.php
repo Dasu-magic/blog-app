@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST["password"];
 
     $stmt = $conn->prepare(
-        "SELECT id, username, email, password 
+        "SELECT id, username, email, password, profile_image 
          FROM user 
          WHERE email = ?"
     );
@@ -31,12 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: ../index.php");
             exit();
         }
+        header("Location: ../login.html?error=" . urlencode("Invalid email or password."));
 
-        header("Location: ../login.html?error=" . urlencode("Invalid password."));
         exit();
     }
-
-    header("Location: ../login.html?error=" . urlencode("User not found."));
+     header("Location: ../login.html?error=" . urlencode("Invalid email or password."));
     exit();
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require "php/db.php";
+require_once __DIR__ . "/php/bootstrap.php";
 
 if (!isset($_GET["id"])) {
     header("Location: index.php");
@@ -72,7 +72,7 @@ $authorAvatar = !empty($blog["profile_image"]) ? htmlspecialchars($blog["profile
 
     <title><?php echo htmlspecialchars($blog["title"]); ?></title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<?= APP_URL ?>/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
@@ -134,7 +134,10 @@ $authorAvatar = !empty($blog["profile_image"]) ? htmlspecialchars($blog["profile
                 $_SESSION["user_id"] == $blog["user_id"]
             ): ?>
                 <a href="edit_blog.php?id=<?php echo $blog["id"]; ?>" class="btn-secondary">Edit Blog</a>
-                <a href="php/delete_blog.php?id=<?php echo $blog["id"]; ?>" class="btn-primary" onclick="return confirm('Are you sure you want to delete this blog?');">Delete Blog</a>
+                <form action="php/delete_blog.php" method="POST" class="inline-form" onsubmit="return confirm('Are you sure you want to delete this blog?');">
+    <input type="hidden" name="id" value="<?php echo $blog["id"]; ?>">
+    <button type="submit" class="btn-primary">Delete Blog</button>
+</form>
             <?php endif; ?>
         </div>
 

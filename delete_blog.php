@@ -8,12 +8,12 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-if (!isset($_GET["id"])) {
+if ($_SERVER["REQUEST_METHOD"] !== "POST" || !isset($_POST["id"])) {
     header("Location: ../index.php");
     exit();
 }
 
-$blog_id = $_GET["id"];
+$blog_id = $_POST["id"];
 $user_id = $_SESSION["user_id"];
 
 $stmt = $conn->prepare(

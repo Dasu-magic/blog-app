@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $fileExt = strtolower(pathinfo($_FILES["profile_image"]["name"], PATHINFO_EXTENSION));
         $allowed = ["jpg", "jpeg", "png", "gif", "webp"];
 
-        if (in_array($fileExt, $allowed, true)) {
+        if (in_array($fileExt, $allowed, true) && getimagesize($_FILES["profile_image"]["tmp_name"]) !== false) {
             $fileName = uniqid("profile_", true) . "." . $fileExt;
             $target = $uploadDir . $fileName;
 
@@ -27,8 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    $stmt = $conn->prepare("INSERT INTO user (username, email, password, profile_image) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $name, $email, $password, $profileImage);
+    $role = "user";
+
+    $stmt = $conn->prepare("INSERT INTO user (username, email, password, profile_image, role) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $name, $email, $password, $profileImage, $role);
 
     if ($stmt->execute()) {
         $_SESSION["user_id"] = $conn->insert_id;

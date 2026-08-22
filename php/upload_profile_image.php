@@ -20,9 +20,7 @@ if (!is_dir($uploadDir)) {
 $fileExt = strtolower(pathinfo($_FILES["profile_image"]["name"], PATHINFO_EXTENSION));
 $allowed = ["png", "jpg", "jpeg", "gif", "webp"];
 
-if (!in_array($fileExt, $allowed, true)) {
-    header("Location: ../profile.php?error=" . urlencode("Please upload a valid image file."));
-    exit();
+if (!in_array($fileExt, $allowed, true) || getimagesize($_FILES["profile_image"]["tmp_name"]) === false) {
 }
 
 $fileName = "profile_" . $_SESSION["user_id"] . "_" . uniqid() . "." . $fileExt;
