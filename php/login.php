@@ -5,7 +5,6 @@ session_start();
 require "db.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
     $email = trim($_POST["email"]);
     $password = $_POST["password"];
 
@@ -21,26 +20,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $result = $stmt->get_result();
 
     if ($result->num_rows === 1) {
-
         $user = $result->fetch_assoc();
 
         if (password_verify($password, $user["password"])) {
-
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["username"] = $user["username"];
+            $_SESSION["email"] = $user["email"];
+            $_SESSION["profile_image"] = $user["profile_image"] ?? "";
 
             header("Location: ../index.php");
             exit();
-
-        } else {
-            echo "Invalid password.";
         }
 
-    } else {
-        echo "User not found.";
+        header("Location: ../login.html?error=" . urlencode("Invalid password."));
+        exit();
     }
 
-    $stmt->close();
-    $conn->close();
+    header("Location: ../login.html?error=" . urlencode("User not found."));
+    exit();
 }
 ?>

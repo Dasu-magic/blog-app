@@ -49,13 +49,13 @@ if ($search !== "") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0a0b0d">
+    <meta name="theme-color" content="#FFCC00">
 
-    <title>Blog App</title>
+    <title>LetsBlog</title>
 
     <link rel="stylesheet" href="css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -63,27 +63,33 @@ if ($search !== "") {
 <header>
   <div class="container header-inner">
 <div class="brand">
-  <h1>My Blog</h1>
-  <div class="kicker">Black & White Edition</div>
+  <h1>LetsBlog</h1>
 </div>
 
 <div class="nav-right">
-  <form class="search-form" method="GET" action="index.php">
-    <input type="text" name="search" placeholder="Search blogs..." value="<?php echo isset($_GET["search"]) ? htmlspecialchars($_GET["search"]) : ""; ?>">
-    <button type="submit">Search</button>
-  </form>
+<form class="search-form" method="GET" action="index.php">
+  <span class="search-icon" aria-hidden="true">⌕</span>
+  <input type="text" name="search" placeholder="Search stories..." value="<?php echo isset($_GET["search"]) ? htmlspecialchars($_GET["search"]) : ""; ?>">
+  <button type="submit" aria-label="Search">Search</button>
+</form>
 
-  <nav class="nav-links">
-    <a href="index.php">Home</a>
-    <?php if (isset($_SESSION["user_id"])): ?>
-        <span class="welcome-pill small">Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?></span>
-        <a href="create_blog.php">Create</a>
-        <a href="php/logout.php">Logout</a>
-    <?php else: ?>
-        <a href="login.html">Login</a>
-        <a href="register.html">Register</a>
-        <?php endif; ?>
-  </nav>
+<nav class="nav-links">
+  <?php if (isset($_SESSION["user_id"])): ?>
+      <a href="index.php">Home</a>
+      <a href="create_blog.php" aria-label="Write a blog post" title="Write">✍️ Write</a>
+      <a href="php/logout.php">Logout</a>
+      <span class="profile-inline">
+          <span class="welcome-message"><?php echo htmlspecialchars($_SESSION["username"] ?? "Reader"); ?></span>
+          <a href="profile.php" class="profile-nav-link" aria-label="Go to profile" title="Profile">
+              <img src="<?php echo !empty($_SESSION["profile_image"]) ? htmlspecialchars($_SESSION["profile_image"]) : "default-avatar.svg"; ?>" alt="Profile picture">
+          </a>
+      </span>
+  <?php else: ?>
+      <a href="index.php">Home</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <?php endif; ?>
+</nav>
 </div>
   </div>
 </header>
@@ -91,24 +97,24 @@ if ($search !== "") {
 <main class="container">
 <section class="hero">
     <div class="hero-copy">
-        <span class="eyebrow">Fresh ideas</span>
-        <h2>Stories that move people.</h2>
+        <span class="eyebrow">Real stories</span>
+        <h2>Life, laughter, and the moments we never forget.</h2>
         <p>
-            Discover thoughtful writing, bold opinions, and creative insight from people who love to express ideas in a clean, modern space.
+            Share the little incidents, funny everyday mishaps, and personal stories that make life feel real. From awkward moments to unforgettable memories, LetsBlog is where people tell it like it happened.
         </p>
         <div class="hero-actions">
             <a href="register.html" class="btn-primary">Join the community</a>
-            <a href="#latest" class="btn-secondary">Read latest posts</a>
+            <a href="#latest" class="btn-secondary">Read latest stories</a>
         </div>
     </div>
 
     <div class="hero-panel">
         <div>
-            <div class="featured-label">Featured Story</div>
-            <h3>Why thoughtful design still commands attention.</h3>
+            <div class="featured-label">Featured story</div>
+            <h3>The small moments that become the best memories.</h3>
         </div>
         <p>
-            Simplicity brings clarity. A disciplined visual system makes every story feel more intentional and memorable.
+            People come here to share personal experiences, hilarious day-to-day situations, and honest stories that make others say, “That happened to me too.”
         </p>
         <div class="stats-grid">
             <div class="stat">
@@ -121,55 +127,25 @@ if ($search !== "") {
             </div>
             <div class="stat">
                 <strong>4.9</strong>
-                <span>Rating</span>
+                <span>Laughs</span>
             </div>
         </div>
-    </div>
-</section>
-
-<section class="dashboard-shell" aria-label="Live dashboard overview">
-    <div class="dashboard-header">
-        <h3>Live dashboard</h3>
-        <div class="live-indicator">
-            <span class="live-dot"></span>
-            <span id="live-clock">Updated just now</span>
-        </div>
-    </div>
-
-    <div class="dashboard-grid">
-        <article class="metric-card cyan">
-            <span class="label">Active readers</span>
-            <strong data-target="1864">0</strong>
-            <span>+12.4% this week</span>
-        </article>
-        <article class="metric-card teal">
-            <span class="label">Published</span>
-            <strong data-target="72">0</strong>
-            <span>12 today</span>
-        </article>
-        <article class="metric-card amber">
-            <span class="label">Engagement</span>
-            <strong data-target="84">0</strong>
-            <span>Avg. 4.7 min read</span>
-        </article>
-        <article class="metric-card rose">
-            <span class="label">Followers</span>
-            <strong data-target="9200">0</strong>
-            <span>+430 this month</span>
-        </article>
     </div>
 </section>
 
 <section class="content-grid" id="latest">
     <div class="blog-list">
         <div class="section-heading">
-            <h2>Latest Blogs</h2>
-            <span class="small">Fresh writing</span>
+            <h2>Latest stories</h2>
+            <span class="small">Fresh memories</span>
         </div>
 
         <?php if ($result && $result->num_rows > 0): ?>
             <?php while ($blog = $result->fetch_assoc()): ?>
                 <article class="blog-card">
+                    <?php if (!empty($blog["image_path"])): ?>
+                        <img class="blog-thumb" src="<?php echo htmlspecialchars($blog["image_path"]); ?>" alt="<?php echo htmlspecialchars($blog["title"]); ?>">
+                    <?php endif; ?>
                     <div class="meta-row">
                         <span><?php echo htmlspecialchars($blog["username"]); ?></span>
                         <span>•</span>
@@ -193,27 +169,27 @@ if ($search !== "") {
 
     <aside class="sidebar">
         <div class="widget">
-            <h4>Popular Topics</h4>
+            <h4>Popular stories</h4>
             <ul class="topic-list">
-                <li>Design</li>
-                <li>Writing</li>
-                <li>Creativity</li>
-                <li>Startup life</li>
+                <li>Funny day-to-day moments</li>
+                <li>Personal incidents</li>
+                <li>Life lessons</li>
+                <li>Everyday adventures</li>
             </ul>
         </div>
 
         <div class="widget">
             <h4>About</h4>
-            <p class="small">A minimal place for ideas, stories, and voices worth reading.</p>
+            <p class="small">A space for honest moments, funny memories, and the little stories that make everyday life interesting.</p>
         </div>
     </aside>
 </section>
 </main>
 
-<footer>
-  <div class="container">
-<p class="small">&copy; 2026 My Blog. Built with ♥ — minimalist black & white theme.</p>
-  </div>
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <span>Designed by Dasuni Chamathka</span>
+    </div>
 </footer>
 
 </body>

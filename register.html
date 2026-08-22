@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - Blog App</title>
-  <meta name="theme-color" content="#0a0b0d">
+  <title>Register - LetsBlog</title>
+  <meta name="theme-color" content="#FFCC00">
   <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <script src="js/script.js" defer></script>
 </head>
@@ -14,8 +14,7 @@
   <header>
     <div class="container header-inner">
       <div class="brand">
-        <h1>My Blog</h1>
-        <div class="kicker">Black & White Edition</div>
+        <h1>LetsBlog</h1>
       </div>
 
       <nav class="nav-links">
@@ -28,30 +27,28 @@
   <div class="auth-shell">
     <div class="auth-card">
       <h2>Create an account</h2>
-      <form action="php/register.php" method="POST">
+      <form action="php/register.php" method="POST" enctype="multipart/form-data">
         <div class="form-row">
-          <label for="username">Username</label>
-          <input id="username" type="text" name="username" placeholder="Username" required>
+          <label for="name">Name</label>
+          <input id="name" type="text" name="name" placeholder="Enter your full name" required>
         </div>
         <div class="form-row">
           <label for="email">Email</label>
-          <input id="email" type="email" name="email" placeholder="Email" required>
+          <input id="email" type="email" name="email" placeholder="you@example.com" required>
         </div>
         <div class="form-row">
           <label for="password">Password</label>
-          <input id="password" type="password" name="password" placeholder="Password" required>
+          <input id="password" type="password" name="password" placeholder="Create a password" required>
+        </div>
+        <div class="form-row">
+          <label for="profile_image">Profile picture</label>
+          <input id="profile_image" type="file" name="profile_image" accept="image/*">
         </div>
         <button type="submit">Register</button>
       </form>
       <p class="small">Already have an account? <a href="login.html">Login</a></p>
     </div>
   </div>
-
-  <footer>
-    <div class="container">
-      <p class="small">&copy; 2026 My Blog</p>
-    </div>
-  </footer>
 
 </body>
 </html>

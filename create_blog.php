@@ -13,11 +13,11 @@ if (!isset($_SESSION["user_id"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0a0b0d">
-    <title>Create Blog</title>
+    <meta name="theme-color" content="#FFCC00">
+    <title>Create Blog - LetsBlog</title>
 
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="js/script.js" defer></script>
 </head>
@@ -27,8 +27,7 @@ if (!isset($_SESSION["user_id"])) {
 <header>
   <div class="container header-inner">
     <div class="brand">
-      <h1>Create Blog</h1>
-      <div class="kicker">Write something meaningful</div>
+      <h1>LetsBlog</h1>
     </div>
 
     <nav class="nav-links">
@@ -39,9 +38,14 @@ if (!isset($_SESSION["user_id"])) {
 </header>
 
 <main class="auth-shell">
-    <div class="form-card">
-        <h2>Write your next story</h2>
-        <form action="php/create_blog.php" method="POST">
+    <div class="form-card compose-card">
+        <div class="compose-header">
+            <div>
+                <span class="eyebrow">New post</span>
+                <h2>Write your next story</h2>
+            </div>
+        </div>
+        <form action="php/create_blog.php" method="POST" enctype="multipart/form-data">
             <div class="form-row">
                 <label>Blog Title</label>
                 <input
@@ -62,16 +66,15 @@ if (!isset($_SESSION["user_id"])) {
                 ></textarea>
             </div>
 
+            <div class="form-row">
+                <label>Blog Image</label>
+                <input type="file" name="blog_image" accept="image/png,image/jpeg,image/jpg,image/gif,image/webp">
+            </div>
+
             <button type="submit">Publish Blog</button>
         </form>
     </div>
 </main>
-
-<footer>
-  <div class="container">
-    <p class="small">&copy; 2026 My Blog. Write long-form. Stay bold.</p>
-  </div>
-</footer>
 
 </body>
 </html>

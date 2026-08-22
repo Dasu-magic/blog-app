@@ -41,10 +41,10 @@ $blog = $result->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0a0b0d">
-    <title>Edit Blog</title>
+    <meta name="theme-color" content="#FFCC00">
+    <title>Edit Blog - LetsBlog</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="js/script.js" defer></script>
 </head>
@@ -54,8 +54,7 @@ $blog = $result->fetch_assoc();
 <header>
   <div class="container header-inner">
     <div class="brand">
-      <h1>Edit Blog</h1>
-      <div class="kicker">Refine your post</div>
+      <h1>LetsBlog</h1>
     </div>
 
     <nav class="nav-links">
@@ -67,7 +66,7 @@ $blog = $result->fetch_assoc();
 <main class="auth-shell">
     <div class="form-card">
         <h2>Edit your post</h2>
-        <form action="php/edit_blog.php" method="POST">
+        <form action="php/edit_blog.php" method="POST" enctype="multipart/form-data">
 
             <input
                 type="hidden"
@@ -94,16 +93,22 @@ $blog = $result->fetch_assoc();
                 ><?php echo htmlspecialchars($blog["content"]); ?></textarea>
             </div>
 
+            <?php if (!empty($blog["image_path"])): ?>
+                <div class="form-row">
+                    <label>Current Blog Image</label>
+                    <img src="<?php echo htmlspecialchars($blog["image_path"]); ?>" alt="Blog image preview" class="blog-preview-image">
+                </div>
+            <?php endif; ?>
+
+            <div class="form-row">
+                <label>Replace blog image</label>
+                <input type="file" name="blog_image" accept="image/png,image/jpeg,image/jpg,image/gif,image/webp">
+            </div>
+
             <button type="submit">Update Blog</button>
         </form>
     </div>
 </main>
-
-<footer>
-  <div class="container">
-    <p class="small">&copy; 2026 My Blog. Edit with care.</p>
-  </div>
-</footer>
 
 </body>
 </html>

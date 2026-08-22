@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Blog App</title>
-    <meta name="theme-color" content="#0a0b0d">
+    <title>Login - LetsBlog</title>
+    <meta name="theme-color" content="#FFCC00">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="js/script.js" defer></script>
 </head>
@@ -15,8 +15,7 @@
 <header>
   <div class="container header-inner">
     <div class="brand">
-      <h1>My Blog</h1>
-      <div class="kicker">Black & White Edition</div>
+      <h1>LetsBlog</h1>
     </div>
 
     <nav class="nav-links">
@@ -31,13 +30,15 @@
     <h2>Welcome back</h2>
 
     <form action="php/login.php" method="POST">
+        <div id="login-error" class="form-error" hidden></div>
+
         <div class="form-row">
             <label for="email">Email</label>
             <input
                 id="email"
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder="you@example.com"
                 required
             >
         </div>
@@ -48,7 +49,7 @@
                 id="password"
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Enter your password"
                 required
             >
         </div>
@@ -63,11 +64,17 @@
   </div>
 </div>
 
-<footer>
-  <div class="container">
-    <p class="small">&copy; 2026 My Blog</p>
-  </div>
-</footer>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get("error");
+    const errorBox = document.getElementById("login-error");
 
+    if (error && errorBox) {
+      errorBox.textContent = decodeURIComponent(error);
+      errorBox.hidden = false;
+    }
+  });
+</script>
 </body>
 </html>

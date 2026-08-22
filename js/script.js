@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const content = form.querySelector('textarea[name="content"]');
             const email = form.querySelector('input[name="email"]');
             const password = form.querySelector('input[name="password"]');
-            const username = form.querySelector('input[name="username"]');
+            const name = form.querySelector('input[name="name"]');
 
             if (title && title.value.trim().length < 3) {
                 alert("Blog title must be at least 3 characters.");
@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            if (username && username.value.trim().length < 3) {
-                alert("Username must be at least 3 characters.");
+            if (name && name.value.trim().length < 2) {
+                alert("Write must be at least 2 characters.");
                 event.preventDefault();
                 return;
             }
@@ -50,35 +50,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    const liveClock = document.getElementById("live-clock");
-    if (liveClock) {
-        const updateClock = function () {
-            const now = new Date();
-            const timeText = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-            liveClock.textContent = "Updated at " + timeText;
-        };
-
-        updateClock();
-        setInterval(updateClock, 30000);
-    }
-
-    const metricCards = document.querySelectorAll("[data-target]");
-    metricCards.forEach(function (element) {
-        const target = Number(element.dataset.target) || 0;
-        let current = 0;
-        const step = Math.max(1, Math.ceil(target / 40));
-
-        const tick = function () {
-            current += step;
-            if (current >= target) {
-                current = target;
-                element.textContent = current.toLocaleString();
-                return;
-            }
-            element.textContent = current.toLocaleString();
-            requestAnimationFrame(tick);
-        };
-
-        requestAnimationFrame(tick);
-    });
 });

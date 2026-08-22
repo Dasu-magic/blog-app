@@ -1,2 +1,2 @@
-# blog-app
-first blog app
+# LetsBlog
+A vibrant blog app for thoughtful storytelling.
