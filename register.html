@@ -2,19 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register - Blog App</title>
+  <meta name="theme-color" content="#0a0b0d">
   <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <script src="js/script.js" defer></script>
 </head>
 <body>
-  <div class="auth-container">
-    <h2>Create an Account</h2>
-    <form action="php/register.php" method="POST">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <button type="submit">Register</button>
-    </form>
-    <p>Already have an account? <a href="login.html">Login</a></p>
+  <header>
+    <div class="container header-inner">
+      <div class="brand">
+        <h1>My Blog</h1>
+        <div class="kicker">Black & White Edition</div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.php">Home</a>
+        <a href="login.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="auth-shell">
+    <div class="auth-card">
+      <h2>Create an account</h2>
+      <form action="php/register.php" method="POST">
+        <div class="form-row">
+          <label for="username">Username</label>
+          <input id="username" type="text" name="username" placeholder="Username" required>
+        </div>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="form-row">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+      <p class="small">Already have an account? <a href="login.html">Login</a></p>
+    </div>
   </div>
+
+  <footer>
+    <div class="container">
+      <p class="small">&copy; 2026 My Blog</p>
+    </div>
+  </footer>
+
 </body>
 </html>

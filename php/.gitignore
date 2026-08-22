@@ -1,11 +1,7 @@
-# =========================
 # DEPENDENCIES
-# =========================
 node_modules/
 
-# =========================
-# ENVIRONMENT / SECRETS
-# =========================
+# ENVIRONMENT 
 .env
 .env.local
 .env.development.local
@@ -15,18 +11,13 @@ node_modules/
 
 # Keep example env file
 !.env.example
-
-# =========================
 # BUILD FILES
-# =========================
 dist/
 build/
 .next/
 out/
 
-# =========================
 # LOG FILES
-# =========================
 logs/
 *.log
 npm-debug.log*
@@ -34,74 +25,54 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# =========================
 # CACHE
-# =========================
 .cache/
 .parcel-cache/
 .eslintcache
 *.tsbuildinfo
 
-# =========================
-# IDE / EDITOR
-# =========================
+#  EDITOR
 .vscode/
 .idea/
 
-# =========================
 # OPERATING SYSTEM FILES
-# =========================
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# =========================
 # DATABASE FILES
-# =========================
 *.sqlite
 *.sqlite3
 *.db
 
-# =========================
 # USER UPLOADS
-# =========================
+# 
 uploads/
 
-# =========================
 # TEMPORARY FILES
-# =========================
+# 
 tmp/
 temp/
 *.tmp
 *.temp
 
-# =========================
-# COVERAGE / TESTING
-# =========================
+#  TESTING
 coverage/
 
-# =========================
 # SERVER SECRETS / KEYS
-# =========================
 *.pem
 *.key
 *.crt
 *.p12
 *.pfx
 
-# =========================
 # VITE
-# =========================
 .vite/
 
-# =========================
 # REACT / NEXT
-# =========================
 .vercel/
 
-# =========================
 # PACKAGE MANAGER CACHE
-# =========================
 .npm/
 .pnpm-store/
 .yarn/cache/

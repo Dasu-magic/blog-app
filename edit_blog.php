@@ -41,55 +41,69 @@ $blog = $result->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0b0d">
     <title>Edit Blog</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="js/script.js" defer></script>
 </head>
 
 <body>
 
 <header>
-    <h1>Edit Blog</h1>
+  <div class="container header-inner">
+    <div class="brand">
+      <h1>Edit Blog</h1>
+      <div class="kicker">Refine your post</div>
+    </div>
 
-    <nav>
-        <a href="index.php">Home</a>
+    <nav class="nav-links">
+      <a href="index.php">Home</a>
     </nav>
+  </div>
 </header>
 
-<main>
+<main class="auth-shell">
+    <div class="form-card">
+        <h2>Edit your post</h2>
+        <form action="php/edit_blog.php" method="POST">
 
-    <form action="php/edit_blog.php" method="POST">
+            <input
+                type="hidden"
+                name="id"
+                value="<?php echo $blog["id"]; ?>"
+            >
 
-        <input
-            type="hidden"
-            name="id"
-            value="<?php echo $blog["id"]; ?>"
-        >
+            <div class="form-row">
+                <label>Blog Title</label>
+                <input
+                    type="text"
+                    name="title"
+                    value="<?php echo htmlspecialchars($blog["title"]); ?>"
+                    required
+                >
+            </div>
 
-        <label>Blog Title</label>
+            <div class="form-row">
+                <label>Blog Content</label>
+                <textarea
+                    name="content"
+                    rows="10"
+                    required
+                ><?php echo htmlspecialchars($blog["content"]); ?></textarea>
+            </div>
 
-        <input
-            type="text"
-            name="title"
-            value="<?php echo htmlspecialchars($blog["title"]); ?>"
-            required
-        >
-
-        <label>Blog Content</label>
-
-        <textarea
-            name="content"
-            rows="10"
-            required
-        ><?php echo htmlspecialchars($blog["content"]); ?></textarea>
-
-        <button type="submit">
-            Update Blog
-        </button>
-
-    </form>
-
+            <button type="submit">Update Blog</button>
+        </form>
+    </div>
 </main>
+
+<footer>
+  <div class="container">
+    <p class="small">&copy; 2026 My Blog. Edit with care.</p>
+  </div>
+</footer>
 
 </body>
 </html>
